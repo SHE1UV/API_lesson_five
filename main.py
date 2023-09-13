@@ -57,7 +57,6 @@ def get_statistic_vacancies_sj(sj_token):
                 predicted_salary = predict_rub_salary(vacancy["payment_from"],
                                                  vacancy["payment_to"])
                 if predicted_salary:
-                    vacancies_processed += 1
                     salary_by_vacancies.append(predicted_salary)
         total_vacancies = vacancies['total']
         average_salary = None
@@ -67,7 +66,7 @@ def get_statistic_vacancies_sj(sj_token):
 
         vacancies_by_language[language] = {
             'vacancies_found': total_vacancies,
-            'vacancies_processed': vacancies_processed,
+            'vacancies_processed': len(salary_by_vacancies),
             'average_salary': average_salary
         }
 
@@ -103,7 +102,6 @@ def get_statistic_vacancies_hh():
                         vacancy['salary'].get('from'),
                         vacancy['salary'].get('to'))
                     if predicted_salary:
-                        vacancies_processed += 1
                         salary_by_vacancies.append(predicted_salary)
         total_vacancies = vacancies['found']
         average_salary = None
@@ -113,7 +111,7 @@ def get_statistic_vacancies_hh():
 
         vacancies_by_language[language] = {
             'vacancies_found': total_vacancies,
-            'vacancies_processed': vacancies_processed,
+            'vacancies_processed': len(salary_by_vacancies),
             'average_salary': average_salary
         }
 
