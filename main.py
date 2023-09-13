@@ -47,7 +47,7 @@ def get_statistic_vacancies_sj(sj_token):
     ]
     for language in languages:
         vacancies_processed = 0
-        salary_by_vacancy = []
+        salary_by_vacancies = []
         for page in count(0, 1):
             vacancies = get_vacancies_sj(sj_token, language, page=page)
             if not vacancies['objects']:
@@ -58,12 +58,12 @@ def get_statistic_vacancies_sj(sj_token):
                                                  vacancy["payment_to"])
                 if salary_info:
                     vacancies_processed += 1
-                    salary_by_vacancy.append(salary_info)
+                    salary_by_vacancies.append(salary_info)
         total_vacancies = vacancies['total']
         average_salary = None
-        if salary_by_vacancy:
+        if salary_by_vacancies:
             average_salary = int(
-                sum(salary_by_vacancy) / len(salary_by_vacancy))
+                sum(salary_by_vacancies) / len(salary_by_vacancies))
 
         vacancies_by_language[language] = {
             'vacancies_found': total_vacancies,
@@ -91,7 +91,7 @@ def get_statistic_vacancies_hh():
     ]
     for language in languages:
         vacancies_processed = 0
-        salary_by_vacancy = []
+        salary_by_vacancies = []
         for page in count(0):
             vacancies = get_vacancies_hh(language, page=page)
             if page >= vacancies["pages"] - 1:
@@ -104,12 +104,12 @@ def get_statistic_vacancies_hh():
                         vacancy['salary'].get('to'))
                     if salary_info:
                         vacancies_processed += 1
-                        salary_by_vacancy.append(salary_info)
+                        salary_by_vacancies.append(salary_info)
         total_vacancies = vacancies['found']
         average_salary = None
-        if salary_by_vacancy:
+        if salary_by_vacancies:
             average_salary = int(
-                sum(salary_by_vacancy) / len(salary_by_vacancy))
+                sum(salary_by_vacancies) / len(salary_by_vacancies))
 
         vacancies_by_language[language] = {
             'vacancies_found': total_vacancies,
